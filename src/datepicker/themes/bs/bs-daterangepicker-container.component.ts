@@ -24,6 +24,8 @@ export class BsDaterangepickerContainerComponent extends BsDatepickerAbstractCom
 
   valueChange = new EventEmitter<Date[]>();
 
+  applyChange = new EventEmitter<boolean>();
+
   _rangeStack: Date[] = [];
   _subs: Subscription[] = [];
   constructor(
@@ -55,6 +57,12 @@ export class BsDaterangepickerContainerComponent extends BsDatepickerAbstractCom
       this._store
         .select(state => state.selectedRange)
         .subscribe(date => this.valueChange.emit(date))
+    );
+
+    this._subs.push(
+      this._store
+        .select(state => state.applied)
+        .subscribe(date => this.applyChange.emit(date))
     );
   }
 

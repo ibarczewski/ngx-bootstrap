@@ -17,7 +17,6 @@ import {
         (onNavigate)="navigateTo($event)"
         (onViewMode)="changeViewMode($event)"
       ></bs-datepicker-navigation-view>
-
       <table role="grid" class="months">
         <tbody>
         <tr *ngFor="let row of calendar.months">
@@ -27,11 +26,14 @@ import {
               (mouseleave)="hoverMonth(month, false)"
               [class.disabled]="month.isDisabled"
               [class.is-highlighted]="month.isHovered">
-            <span>{{ month.label }}</span>
+            <span bsDatepickerMonthDecorator
+            [month]="month"></span>
           </td>
         </tr>
+        <button (click)="apply()">apply</button>
         </tbody>
       </table>
+      
     </bs-calendar-layout>
   `
 })
@@ -43,6 +45,8 @@ export class BsMonthCalendarViewComponent {
 
   @Output() onSelect = new EventEmitter<CalendarCellViewModel>();
   @Output() onHover = new EventEmitter<CellHoverEvent>();
+
+  @Output() onApply = new EventEmitter<void>();
 
   navigateTo(event: BsNavigationDirection): void {
     const step = BsNavigationDirection.DOWN === event ? -1 : 1;
@@ -59,5 +63,9 @@ export class BsMonthCalendarViewComponent {
 
   changeViewMode(event: BsDatepickerViewMode): void {
     this.onViewMode.emit(event);
+  }
+
+  apply(): void {
+    this.onApply.emit();
   }
 }

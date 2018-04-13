@@ -23,6 +23,8 @@ export class BsDatepickerState
   // daterange picker
   selectedRange?: Date[];
 
+  applied?: boolean;
+
   // initial date of calendar, today by default
   view: BsDatepickerViewState;
 

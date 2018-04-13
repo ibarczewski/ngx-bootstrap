@@ -18,6 +18,7 @@ export interface CalendarCellViewModel {
   label: string;
   isDisabled?: boolean;
   isHovered?: boolean;
+  isSelected?: boolean;
 }
 
 /** *************** */
@@ -27,7 +28,6 @@ export interface DayViewModel extends CalendarCellViewModel {
   isInRange?: boolean;
   isSelectionStart?: boolean;
   isSelectionEnd?: boolean;
-  isSelected?: boolean;
   // day index
   monthIndex?: number;
   weekIndex?: number;

@@ -4,5 +4,5 @@ import { BsDatepickerConfig } from './bs-datepicker.config';
 @Injectable()
 export class BsDaterangepickerConfig extends BsDatepickerConfig {
   // DatepickerRenderOptions
-  displayMonths = 2;
+  displayMonths = 1;
 }

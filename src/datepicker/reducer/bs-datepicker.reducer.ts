@@ -119,6 +119,14 @@ export function bsDatepickerReducer(state = initialDatepickerState,
       return Object.assign({}, state, newState);
     }
 
+    case BsDatepickerActions.APPLY_RANGE: {
+      const newState = {
+        applied: true
+      }
+
+      return Object.assign({}, state, newState);
+    }
+
     // date range picker
     case BsDatepickerActions.SELECT_RANGE: {
       const newState = {
@@ -273,6 +281,7 @@ function formatReducer(state: BsDatepickerState,
 
 function flagReducer(state: BsDatepickerState,
                      action: Action): BsDatepickerState {
+  console.log('i am reduced');
   if (state.view.mode === 'day') {
     const flaggedMonths = state.formattedMonths.map(
       (formattedMonth, monthIndex) =>
@@ -292,6 +301,7 @@ function flagReducer(state: BsDatepickerState,
   }
 
   if (state.view.mode === 'month') {
+    console.log('state', state);
     const flaggedMonthsCalendar = state.monthsCalendar.map(
       (formattedMonth, monthIndex) =>
         flagMonthsCalendar(formattedMonth, {
@@ -300,6 +310,7 @@ function flagReducer(state: BsDatepickerState,
           maxDate: state.maxDate,
           hoveredMonth: state.hoveredMonth,
           displayMonths: state.displayMonths,
+          selectedRange: state.selectedRange,
           monthIndex
         })
     );

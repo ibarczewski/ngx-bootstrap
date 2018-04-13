@@ -28,6 +28,8 @@ export class BsDatepickerActions {
 
   static readonly SELECT_RANGE = '[daterangepicker] select dates range';
 
+  static readonly APPLY_RANGE = '[daterangepicker] apply dates range';
+
   calculate(): Action {
     return { type: BsDatepickerActions.CALCULATE };
   }
@@ -83,7 +85,20 @@ export class BsDatepickerActions {
     };
   }
 
+  applyRange(): Action {
+    return {
+      type: BsDatepickerActions.APPLY_RANGE
+    }
+  }
+
   hoverDay(event: CellHoverEvent): Action {
+    return {
+      type: BsDatepickerActions.HOVER,
+      payload: event.isHovered ? event.cell.date : null
+    };
+  }
+
+  hoverMonth(event: CellHoverEvent): Action {
     return {
       type: BsDatepickerActions.HOVER,
       payload: event.isHovered ? event.cell.date : null

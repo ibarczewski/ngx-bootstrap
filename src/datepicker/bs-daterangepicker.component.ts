@@ -72,6 +72,8 @@ export class BsDaterangepickerDirective
     this.bsValueChange.emit(value);
   }
 
+  bsTempValue: Date[];
+
   /**
    * Config object for daterangepicker
    */
@@ -170,8 +172,18 @@ export class BsDaterangepickerDirective
       this._datepickerRef.instance.valueChange
         .filter((range: Date[]) => range && range[0] && !!range[1])
         .subscribe((value: Date[]) => {
-          this.bsValue = value;
+          this.bsTempValue = value;
+          // this.hide();
+          // todo: investigate this??
+        })
+    );
+
+    this._subs.push(
+      this._datepickerRef.instance.applyChange
+        .subscribe((value: boolean) => {
+          this.bsValue = this.bsTempValue;
           this.hide();
+          // todo: investigate this??
         })
     );
   }

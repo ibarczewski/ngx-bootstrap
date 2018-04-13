@@ -31,6 +31,7 @@ export class BsDatepickerEffects {
 
   private _store: BsDatepickerStore;
   private _subs: Subscription[] = [];
+  private _rangeStack: Date[] = [];
 
   constructor(private _actions: BsDatepickerActions,
               private _localeService: BsLocaleService) {}
@@ -123,7 +124,13 @@ export class BsDatepickerEffects {
     };
 
     container.monthHoverHandler = (event: CellHoverEvent): void => {
+      // if (event || _cell.isDisabled) {
+      //   return;
+      // }
+
+      this._store.dispatch(this._actions.hoverMonth(event));
       event.cell.isHovered = event.isHovered;
+
     };
 
     container.yearHoverHandler = (event: CellHoverEvent): void => {
@@ -142,13 +149,27 @@ export class BsDatepickerEffects {
       if (event.isDisabled) {
         return;
       }
-      this._store.dispatch(
-        this._actions.navigateTo({
-          unit: {month: getMonth(event.date)},
-          viewMode: 'day'
-        })
-      );
+
+      if (this._rangeStack.length === 1) {
+        this._rangeStack =
+          event.date >= this._rangeStack[0]
+            ? [this._rangeStack[0], event.date]
+            : [event.date];
+      } else if (this._rangeStack.length === 0 || this._rangeStack.length === 2) {
+        this._rangeStack = [event.date];
+         
+      }
+      this._store.dispatch(this._actions.selectRange(this._rangeStack)); 
     };
+
+    container.apply = () : void => {
+      console.log('apply!');
+      // this._store.dispatch(this._actions.selectRange(this._rangeStack));
+      this._store.dispatch(this._actions.applyRange()); 
+      const cloneDate = { ...this._rangeStack};
+      this._rangeStack = cloneDate;
+      this._rangeStack
+    }
 
     container.yearSelectHandler = (event: CalendarCellViewModel): void => {
       if (event.isDisabled) {

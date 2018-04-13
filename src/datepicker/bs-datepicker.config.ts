@@ -27,7 +27,7 @@ export class BsDatepickerConfig
   /**
    * Defaut mode for all date pickers
    */
-  minMode?: BsDatepickerViewMode;
+  minMode?: BsDatepickerViewMode = 'month';
 
   /** CSS class which will be applied to datepicker container,
    * usually used to set color theme

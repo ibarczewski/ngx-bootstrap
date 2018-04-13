@@ -20,6 +20,7 @@ import { BsCurrentDateViewComponent } from './themes/bs/bs-current-date-view.com
 import { BsCustomDatesViewComponent } from './themes/bs/bs-custom-dates-view.component';
 import { BsDatepickerContainerComponent } from './themes/bs/bs-datepicker-container.component';
 import { BsDatepickerDayDecoratorComponent } from './themes/bs/bs-datepicker-day-decorator.directive';
+import { BsDatepickerMonthDecoratorComponent } from './themes/bs/bs-datepicker-month-decorator.directive';
 import { BsDatepickerNavigationViewComponent } from './themes/bs/bs-datepicker-navigation-view.component';
 import { BsDaterangepickerContainerComponent } from './themes/bs/bs-daterangepicker-container.component';
 import { BsDaysCalendarViewComponent } from './themes/bs/bs-days-calendar-view.component';
@@ -42,6 +43,7 @@ const _exports = [
   imports: [CommonModule],
   declarations: [
     BsDatepickerDayDecoratorComponent,
+    BsDatepickerMonthDecoratorComponent,
     BsCurrentDateViewComponent,
     BsDatepickerNavigationViewComponent,
     BsTimepickerViewComponent,
